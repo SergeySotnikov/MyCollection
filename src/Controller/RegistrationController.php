@@ -24,9 +24,17 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register', name: 'main_register')]
+    /**
+     * @Route("/register", name = "main_register")
+     */
+
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        //если пользователь залогинился мы делаем редирект на страницу профиля
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main_profile_index');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
