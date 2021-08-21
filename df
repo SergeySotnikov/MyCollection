@@ -1,0 +1,7 @@
+ id |      email       |     roles      |                                             password                                              | is_verified | full_name |  phone   | adress | zipcode | is_deleted 
+----+------------------+----------------+---------------------------------------------------------------------------------------------------+-------------+-----------+----------+--------+---------+------------
+  2 | test2@test.com   | []             | $argon2id$v=19$m=65536,t=4,p=1$flVNsiXn5OaWCGHAmwSoxQ$Yezfk49hnEO6khNauWJWFnqgLW6+4K6/tK7sXxQh0Ak | t           |           |          |        |         | f
+  1 | test1@test.com   | []             | $2y$13$FHM7/V6tQXiEoXF3vXgZe.SUykSU7oOFmU1t.j/8WW.VfFI3eym4u                                      | t           |           |          |        |         | f
+  3 | jondoe@gmail.com | ["ROLE_ADMIN"] | $2y$13$vBsdTR5DuP.X7OS7Gcp/SOq103y8eVqgBH1MQcRR6S80h9S0zrHkK                                      | t           | Jon Doe   | +7895412 | USA    |  123544 | f
+(3 строки)
+
