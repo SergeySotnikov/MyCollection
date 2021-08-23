@@ -1,0 +1,49 @@
+{% extends 'Admin/Laoyout/layout_main.html.twig' %}
+
+{% block title_detailed %}All Collection Items{% endblock %}
+
+{% block body %}
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+           {% include 'Admin/_card/_header_action.html.twig' with {
+               'sectionTitle': 'Collection Item',
+               'actionURL': path('admin_collectionItem_add')
+
+           } %}
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="main_table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Collection</th>
+                        <th>Name</th>
+                        <th>Tag</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for collectionItem in collectionItem %}
+                        <tr>
+                            <td>{{ collectionItem.id }}</td>
+                            <td></td>
+                            <td>{{ collectionItem.name }}</td>
+                            <td>{{ collectionItem.tag }}</td>
+
+
+
+                            <td>
+                                <a href="{{ path('admin_collectionItem_edit', {'id': collectionItem.id}) }}" class="btn btn-outline-info">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
