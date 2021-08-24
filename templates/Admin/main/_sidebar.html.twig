@@ -14,26 +14,61 @@
 
     <hr class="sidebar-divider">
 
-    <div class="sidebar-heading">
-        Sales
-    </div>
-
-    <hr class="sidebar-divider">
 
     <div class="sidebar-heading">
-        Collections Item
+        Collection
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
-           aria-expanded="true" aria-controls="collapseProducts">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCollection"
+           aria-expanded="true" aria-controls="collapseCollection">
+            <i class="fas fa-folder fa-cubes"></i>
+            <span>Collections</span>
+        </a>
+        <div id="collapseCollection" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="py-2 collapse-inner">
+                <a class="collapse-item" href="{{ path('admin_collection_list') }}">All list</a>
+                <a class="collapse-item" href="{{ path('admin_collection_add') }}">Add new</a>
+            </div>
+        </div>
+    </li>
+
+    <hr class="sidebar-divider">
+
+
+    <div class="sidebar-heading">
+        Collection item
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseItem"
+           aria-expanded="true" aria-controls="collapseItem">
             <i class="fas fa-fw fa-cubes"></i>
             <span>Items</span>
         </a>
-        <div id="collapseProducts" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseItem" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="py-2 collapse-inner">
                 <a class="collapse-item" href="{{ path('admin_collectionItem_list') }}">All list</a>
                 <a class="collapse-item" href="{{ path('admin_collectionItem_add') }}">Add new</a>
+            </div>
+        </div>
+    </li>
+
+
+    <div class="sidebar-heading">
+        User
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+           aria-expanded="true" aria-controls="collapseUser">
+            <i class="fas fa-user fa-cubes"></i>
+            <span>Users</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="py-2 collapse-inner">
+                <a class="collapse-item" href="{{ path('admin_user_list') }}">All list</a>
+                <a class="collapse-item" href="{{ path('admin_user_add') }}">Add new</a>
             </div>
         </div>
     </li>

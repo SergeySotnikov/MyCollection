@@ -29,7 +29,7 @@
                     {% for collectionItem in collectionItem %}
                         <tr>
                             <td>{{ collectionItem.id }}</td>
-                            <td></td>
+                            <td>{% if collectionItem.collection %} {{ collectionItem.collection.name }} {% endif %}    </td>
                             <td>{{ collectionItem.name }}</td>
                             <td>{{ collectionItem.tag }}</td>
 

@@ -27,6 +27,11 @@ class CollectionItem
      */
     private $Tag;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Collection::class, inversedBy="items")
+     */
+    private $collection;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class CollectionItem
     public function setTag(string $Tag): self
     {
         $this->Tag = $Tag;
+
+        return $this;
+    }
+
+    public function getCollection(): ?Collection
+    {
+        return $this->collection;
+    }
+
+    public function setCollection(?Collection $collection): self
+    {
+        $this->collection = $collection;
 
         return $this;
     }

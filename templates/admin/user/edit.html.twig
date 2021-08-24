@@ -1,16 +1,16 @@
 {% extends 'Admin/Laoyout/layout_main.html.twig' %}
 
-{% block title_detailed %}Edit Collection Item {% endblock %}
+{% block title_detailed %}Edit User{% endblock %}
 
 {% block body %}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <a href="{{ path('admin_collectionItem_list') }}" class="font-weight-bold text-primary">Collection Item</a>
+                    <a href="{{ path('admin_user_list') }}" class="font-weight-bold text-primary">User</a>
                     <div class="ml-2 mr-2">/</div>
                     <h6 class="m-0 font-weight-bold text-primary">
-                        {% if collectionItem.id %}
+                        {% if user.id %}
                             Edit
                         {% else %}
                             Add New
@@ -18,7 +18,7 @@
                     </h6>
                 </div>
 
-                <a href="{{ path('admin_collectionItem_add') }}" class="d-sm-inline-block btn btn-sm btn-info shadow-sm">
+                <a href="{{ path('admin_user_add') }}" class="d-sm-inline-block btn btn-sm btn-info shadow-sm">
                     <i class="fas fa-plus fa-sm text-white-50"></i> Add new
                 </a>
             </div>
@@ -31,36 +31,81 @@
 
             <div class="form-group row">
                 <div class="col-md-1">
-                    {{ form_label(form.collection) }}
+                    Email
                 </div>
                 <div class="col-md-11">
-                    {{ form_widget(form.collection) }}
+                    {{ user.email }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-1">
+                    {{ form_label(form.plainPassword) }}
+                </div>
+                <div class="col-md-11">
+                    {{ form_widget(form.plainPassword) }}
                     <div class="form-error">
-                        {{ form_errors(form.collection) }}
+                        {{ form_errors(form.plainPassword) }}
                     </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-md-1">
-                    {{ form_label(form.name) }}
+                    {{ form_label(form.fullName) }}
                 </div>
                 <div class="col-md-11">
-                    {{ form_widget(form.name) }}
+                    {{ form_widget(form.fullName) }}
                     <div class="form-error">
-                        {{ form_errors(form.name) }}
+                        {{ form_errors(form.fullName) }}
                     </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-md-1">
-                    {{ form_label(form.Tag) }}
+                    {{ form_label(form.phone) }}
                 </div>
                 <div class="col-md-11">
-                    {{ form_widget(form.Tag) }}
+                    {{ form_widget(form.phone) }}
                     <div class="form-error">
-                        {{ form_errors(form.Tag) }}
+                        {{ form_errors(form.phone) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-1">
+                    {{ form_label(form.adress) }}
+                </div>
+                <div class="col-md-11">
+                    {{ form_widget(form.adress) }}
+                    <div class="form-error">
+                        {{ form_errors(form.adress) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-1">
+                    {{ form_label(form.zipcode) }}
+                </div>
+                <div class="col-md-11">
+                    {{ form_widget(form.zipcode) }}
+                    <div class="form-error">
+                        {{ form_errors(form.zipcode) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-1">
+                    {{ form_label(form.roles) }}
+                </div>
+                <div class="col-md-11">
+                    {{ form_widget(form.roles) }}
+                    <div class="form-error">
+                        {{ form_errors(form.roles) }}
                     </div>
                 </div>
             </div>
@@ -69,7 +114,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <a href="{{ path('admin_collectionItem_list') }}" class="btn  btn-return mr-5">
+                    <a href="{{ path('admin_user_list') }}" class="btn  btn-return mr-5">
                         <i class="fas fa-arrow-alt-circle-left"></i>
                     </a>
                     <button type="submit" class="btn btn-primary">
@@ -77,7 +122,7 @@
                     </button>
                 </div>
 
-                {% if collectionItem %}
+                {% if user %}
                     <a class="btn btn-white" data-toggle="modal" data-target="#approveDeleteModal">
                         <i class="fas fa-times fa-sm"></i> Delete row
                     </a>
@@ -89,7 +134,7 @@
         </div>
     </div>
 
-    {% if collectionItem.id %}
+    {% if user.id %}
 
         <div class="modal fade" id="approveDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -103,11 +148,12 @@
                     <div class="modal-body">Item will be deleted</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal"> Cancel</button>
-                        <a class="btn btn-primary" href="{{ path('admin_collectionItem_delete', {'id':collectionItem.id}) }}">Delete row</a>
+                        <a class="btn btn-primary" href="{{ path('admin_user_delete', {'id':user.id}) }}">Delete row</a>
                     </div>
                 </div>
             </div>
         </div>
 
     {% endif %}
+
 {% endblock %}
