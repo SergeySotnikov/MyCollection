@@ -31,13 +31,7 @@
                                         <input type="password" class="form-control form-control-user"
                                                id="inputPassword" name="password" placeholder="Password">
                                     </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="rememberMe" name="_remember_me">
-                                            <label class="custom-control-label" for="rememberMe">Remember
-                                                Me</label>
-                                        </div>
-                                    </div>
+
 
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                     <button type="submit" class="btn btn-primary btn-user btn-block">

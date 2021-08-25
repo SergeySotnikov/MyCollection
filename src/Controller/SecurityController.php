@@ -29,8 +29,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logout", name="main_logout")
      */
-    public function logout()
+    public function logout(): Response
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        return $this->redirectToRoute('main_login');
     }
 }

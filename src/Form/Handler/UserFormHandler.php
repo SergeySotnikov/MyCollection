@@ -24,10 +24,16 @@ class UserFormHandler
         {
             //смена пороля
             $plainPassword = $form->get('plainPassword')->getData();
+            $newEmail = $form->get('newEmail')->getData();
 
             /** @var User $user */
-
             $user = $form->getData();
+
+            if (!$user->getId())
+            {
+                $user->setEmail($newEmail);
+            }
+
 
             if ($plainPassword)
             {

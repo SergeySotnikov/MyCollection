@@ -16,6 +16,14 @@ class EditUserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('newEmail', TextType::class, [
+                'label'=> 'Email',
+                'attr'=>[
+                    'class' => 'form-control'
+                ],
+                'required'=>false,
+                'mapped'=> false
+            ])
             ->add('plainPassword', TextType::class, [
                 'label'=> 'New password',
                 'attr'=>[
@@ -32,6 +40,7 @@ class EditUserFormType extends AbstractType
                 'required'=>false,
                 'choices'=>array_flip([
                     'ROLE_USER'=>'ROLE_USER',
+                    'ROLE_SUPER_ADMIN'=>'ROLE_SUPER_ADMIN',
                     'ROLE_ADMIN'=>'ROLE_ADMIN'
                 ]),
                 'multiple'=>true

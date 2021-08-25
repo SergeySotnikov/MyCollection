@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logout", name="admin_security_logout")
      */
-    public function logout()
+    public function logout(): Response
     {
         return $this->redirectToRoute('admin_security_login');
     }

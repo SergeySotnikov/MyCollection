@@ -7,6 +7,7 @@ use App\Form\EditUserFormType;
 use App\Form\Handler\UserFormHandler;
 use App\Repository\UserRepository;
 use App\Utils\Manager\UserManager;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,10 @@ class UserController extends AbstractController
      */
     public function list(UserRepository $userRepository): Response
     {
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+
+            return $this->redirectToRoute('admin_dashboard');
+        }
 
         $user = $userRepository->findBy([],['id'=>'DESC']);
 
@@ -39,6 +44,10 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, int $id=null, UserFormHandler $userFormHandler): Response
     {
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+
+            return $this->redirectToRoute('admin_dashboard');
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -57,6 +66,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() ) {
 
+            //обращение к сервису для смены пороля
             $user = $userFormHandler->processEditForm($form);
             $this->addFlash('success', 'Your changes were saved!');
 
@@ -81,7 +91,14 @@ class UserController extends AbstractController
      */
     public function delete(User $user, UserManager $userManager): Response
     {
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+
+            return $this->redirectToRoute('admin_dashboard');
+        }
+
         $userManager->remove($user);
+
+        $this->addFlash('warning', 'The User was successfully deleted!');
 
         return $this->redirectToRoute('admin_user_list');
     }
