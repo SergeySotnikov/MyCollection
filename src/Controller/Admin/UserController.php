@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\EditUserFormType;
+use App\Form\Handler\UserFormHandler;
 use App\Repository\UserRepository;
 use App\Utils\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +37,7 @@ class UserController extends AbstractController
      * @Route("/edit/{id}", name = "edit")
      * @Route("/add", name = "add")
      */
-    public function edit(Request $request, int $id=null): Response
+    public function edit(Request $request, int $id=null, UserFormHandler $userFormHandler): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -52,10 +53,15 @@ class UserController extends AbstractController
         $form = $this->createForm(EditUserFormType::class, $user);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid() ) {
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $user = $userFormHandler->processEditForm($form);
+            $this->addFlash('success', 'Your changes were saved!');
+
+            //$entityManager->persist($user);
+            //$entityManager->flush();
 
             return  $this->redirectToRoute('admin_user_list');
 
