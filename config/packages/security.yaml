@@ -43,6 +43,7 @@ security:
             custom_authenticator:
             - App\Security\LoginFormAuthenticator
             - App\Security\facebook\FacebookAuthenticator
+            - App\Security\google\GoogleAuthenticator
             entry_point: App\Security\LoginFormAuthenticator
             logout:
                 path: main_logout
