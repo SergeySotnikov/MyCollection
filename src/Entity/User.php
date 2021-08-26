@@ -68,6 +68,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isDeleted;
 
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $facebookId;
+
     public function __construct()
     {
         $this->isDeleted = false;
@@ -230,6 +235,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsDeleted(?bool $isDeleted): self
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    public function getFacebookId(): ?string
+    {
+        return $this->facebookId;
+    }
+
+    public function setFacebookId(?string $facebookId): self
+    {
+        $this->facebookId = $facebookId;
 
         return $this;
     }

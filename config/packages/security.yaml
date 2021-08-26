@@ -23,7 +23,9 @@ security:
             pattern: ^/admin
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\Admin\LoginFormAuthenticator
+            custom_authenticator:
+            - App\Security\Admin\LoginFormAuthenticator
+
             logout:
                 path: admin_security_logout
                 # where to redirect after logout
@@ -40,7 +42,8 @@ security:
             provider: app_user_provider
             custom_authenticator:
             - App\Security\LoginFormAuthenticator
-
+            - App\Security\facebook\FacebookAuthenticator
+            entry_point: App\Security\LoginFormAuthenticator
             logout:
                 path: main_logout
                 # where to redirect after logout
