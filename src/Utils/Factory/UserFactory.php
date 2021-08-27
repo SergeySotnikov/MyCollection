@@ -20,6 +20,7 @@ class UserFactory
         $user->setEmail($facebookUser->getEmail());
         $user->setFullName($facebookUser->getName());
         $user->setFacebookId($facebookUser->getId());
+        $user->setIsVerified(true);
 
         return $user;
 
@@ -37,6 +38,7 @@ class UserFactory
         $user->setEmail($googleUser->getEmail());
         $user->setFullName($googleUser->getName());
         $user->setGoogleId($googleUser->getId());
+        $user->setIsVerified(true);
 
         return $user;
 

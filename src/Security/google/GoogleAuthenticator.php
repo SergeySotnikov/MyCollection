@@ -75,7 +75,7 @@ class GoogleAuthenticator extends OAuth2Authenticator
                 //если пользователь не найден воспользуемся фабрикой
                 if (!$user){
                     $user = UserFactory::createUserFromGoogleUser($googleUser);
-                    $user->setEmail($email);
+
 
 
                     $plainPassword = PasswordGenerator::generatePassword();

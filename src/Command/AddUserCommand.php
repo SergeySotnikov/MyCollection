@@ -41,7 +41,7 @@ class AddUserCommand extends Command
         $this
             ->addOption('email', 'em',InputArgument::REQUIRED, 'Email')
             ->addOption('password', 'pa',InputArgument::REQUIRED, 'Password')
-            ->addOption('isAdmin', '',InputArgument::OPTIONAL, 'If set the user is created as an administrator', 0)
+            ->addOption('role', '',InputArgument::OPTIONAL, 'Set role')
         ;
     }
 
@@ -51,7 +51,7 @@ class AddUserCommand extends Command
 
         $email = $input->getOption('email');
         $password = $input->getOption('password');
-        $isAdmin = $input->getOption('isAdmin');
+        $role = $input->getOption('role');
 
         $io->title('Add User Command');
         $io->text([
@@ -68,13 +68,14 @@ class AddUserCommand extends Command
         }
 
         // если admin?
-        if (!$isAdmin) {
-            $question = new Question('Is admin (1 or 0)', 0);
-            $isAdmin = $io->askQuestion($question);
+        if (!$role) {
+            $role = $io->ask('Set role');
+
         }
-        $isAdmin = (bool)$isAdmin;
+        //dd($email, $password, $role );
+
         try {
-            $user = $this->createUser($email, $password, $isAdmin);
+            $user = $this->createUser($email, $password, $role);
         } catch (RuntimeException $exception) {
             $io->comment($exception->getMessage());
 
@@ -83,9 +84,9 @@ class AddUserCommand extends Command
         //процедура по формированию пользователя
 
 
-        //dd($email, $password, $isAdmin );
+        //dd($email, $password, $role );
         $successMessage = sprintf('%s was successfully created : %s',
-            $isAdmin ? 'Administrator User' : 'User',
+            $role,
             $email);
 
         $io->success($successMessage);
@@ -97,10 +98,10 @@ class AddUserCommand extends Command
     /**
      * @param string $email
      * @param string $password
-     * @param bool $isAdmin
+     * @param string $role
      * @return User
      */
-    private function createUser(string $email, string $password, bool $isAdmin): User
+    private function createUser(string $email, string $password, string $role ): User
     {
         $existingUser = $this->userRepository->findOneBy(['email' => $email]);
 
@@ -110,7 +111,7 @@ class AddUserCommand extends Command
 
         $user = new User();
         $user->setEmail($email);
-        $user->setRoles([$isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER']);
+        $user->setRoles([$role]);
 
         $encodedPassword = $this->encoder->encodePassword($user,$password);
         $user->setPassword($encodedPassword);
@@ -119,7 +120,7 @@ class AddUserCommand extends Command
         $user->setIsVerified(true);
 
         $this->entityManager->persist($user);
-        $this->entityManager->flush();;
+        $this->entityManager->flush();
 
 
         return $user;

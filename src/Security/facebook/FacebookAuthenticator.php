@@ -73,7 +73,6 @@ class FacebookAuthenticator extends OAuth2Authenticator
                 //если пользователь не найден воспользуемся фабрикой
                 if (!$user){
                     $user = UserFactory::createUserFromFacebookUser($facebookUser);
-                    $user->setEmail($email);
 
 
                     $plainPassword = PasswordGenerator::generatePassword();
