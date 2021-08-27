@@ -18,8 +18,8 @@
                 <table class="table table-bordered" id="main_table">
                     <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Email</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Id', 'o.id') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Email', 'o.email') }}</th>
                         <th>Role</th>
                         <th>Profile info</th>
                         <th>Is verified email</th>
