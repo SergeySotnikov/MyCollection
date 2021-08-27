@@ -22,17 +22,21 @@ class UserController extends AbstractController
     /**
      * @Route("/list", name = "list")
      */
-    public function list(UserRepository $userRepository): Response
+    public function list(Request $request ,UserRepository $userRepository,UserFormHandler $userFormHandler): Response
     {
         if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
 
             return $this->redirectToRoute('admin_dashboard');
         }
 
-        $user = $userRepository->findBy([],['id'=>'DESC']);
+        $filterForm = null;
+        $pagination = $userFormHandler->processUserFiltersForm($request, $filterForm);
+
+        //dd($pagination);
+        //$user = $userRepository->findBy([],['id'=>'DESC']);
 
         return $this->render('admin/user/list.html.twig', [
-            'user'=> $user
+            'pagination'=> $pagination
         ]);
 
     }
